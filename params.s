@@ -1,6 +1,7 @@
             .global filename
             .global xcenter, ycenter, mag
             .global xsize, ysize, iters, antialias
+            .global workercount
 
             .data
 filename:   .asciz  "fractal.ppm"
@@ -12,3 +13,4 @@ xsize:      .word   128
 ysize:      .word   72
 iters:      .word   1000
 antialias:  .word   5
+workercount:.word	4
