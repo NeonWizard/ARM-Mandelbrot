@@ -2,3 +2,4 @@
 .grind
 *.swp
 .DS_Store
+*.o
