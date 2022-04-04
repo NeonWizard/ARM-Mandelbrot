@@ -1,6 +1,7 @@
-        .global calcPixel
+.global calcPixel
 
-        .text
+.text
+
 @ calcPixel(maxiters, col, row, xsize, ysize, antialias, xcenter, ycenter, magnification) -> rgb
 calcPixel:
 	@ passed in values:
@@ -30,7 +31,7 @@ calcPixel:
 	@ (do this before converting xsize/ysize to float to avoid rounding errors)
 	cmp		r3, r4		@ compare xsize with ysize
 	mov		r5, r4		@ r5 (temp minsize) = ysize UNLESS
-	bgt		1f			@ if xsize > ysize, keep minsize = ysize 
+	bgt		1f			@ if xsize > ysize, keep minsize = ysize
 	mov		r5, r3		@ else set r5 (temp minsize) as xsize
 1:
 	sub		r5, r5, #1	@ minsize = minsize - 1
@@ -50,9 +51,9 @@ calcPixel:
 	ldr		r4, [sp, #20]
 
 	@ d registers structure:
-	@ d0 - col 		-> x
-	@ d1 - row 		-> y
-	@ d2 - mag 		-> (minsize-1) * mag
+	@ d0 - col		-> x
+	@ d1 - row		-> y
+	@ d2 - mag		-> (minsize-1) * mag
 	@ d3 - xcenter
 	@ d4 - ycenter
 	@ d5 - xsize	-> col - xsize/2

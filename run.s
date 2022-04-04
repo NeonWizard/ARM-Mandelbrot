@@ -1,28 +1,28 @@
-        .global run
+.global run
 
-        .equ    flags, 577
-        .equ    mode, 0644
+.equ	flags, 577
+.equ	mode, 0644
 
-        .equ	sys_fork, 2
-        .equ	sys_read, 3
-        .equ    sys_write, 4
-        .equ    sys_open, 5
-        .equ    sys_close, 6
-        .equ	sys_pipe, 42
+.equ	sys_fork, 2
+.equ	sys_read, 3
+.equ	sys_write, 4
+.equ	sys_open, 5
+.equ	sys_close, 6
+.equ	sys_pipe, 42
 
-        .equ    fail_open, 1
-        .equ    fail_writeheader, 2
-        .equ    fail_close, 4
-		.equ	fail_writerow, 8
-		.equ	fail_openpipe, 16
+.equ	fail_open, 1
+.equ	fail_writeheader, 2
+.equ	fail_close, 4
+.equ	fail_writerow, 8
+.equ	fail_openpipe, 16
 
-        .text
+.text
 
 @ run() -> exit code
 run:
 @ Open file
 	push	{r4, r5, r6, r7, r8, r9, r10, lr}
-	
+
 	@ open the file
 	ldr	r0, =filename
 	ldr	r1, =flags
@@ -39,7 +39,7 @@ run:
 
 @ Write header
 1:
-	mov	r4, r0 		@ store file descriptor	
+	mov	r4, r0		@ store file descriptor
 
 	@ --- write the header ---
 	@ header -> buffer
@@ -56,7 +56,7 @@ run:
 	mov	r0, r4
 	mov	r7, #sys_write
 	svc	#0
-	
+
 	@ if writing succeeded, continue
 	cmp	r0, #0
 	bge	2f
@@ -121,14 +121,14 @@ run:
 4:
 @ Write lines
 	mov	r8, r9		@ row counter
-5:	
+5:
 	@ for row in range(ysize)
 	mov	r5, #0		@ column counter
 	mov	r6, #0		@ buffer counter
 6:
 	@ for column in range(xsize):
-	ldr	r7, =buffer	
-	@ color = row << 16 + column << 8	
+	ldr	r7, =buffer
+	@ color = row << 16 + column << 8
 	@mov	r1, r8, lsl #16		@ color = row << 16
 	@add	r1, r1, r5, lsl #8	@ color = color + column << 8
 
@@ -171,10 +171,10 @@ run:
 	add	r0, r7, r6	@ offset buffer by bytes already written
 	bl	writeRGB
 	add	r6, r0, r6	@ increase buffer counter by bytes written
-	
+
 	@ add space separator
 	mov		r1, #' '
-	strb 	r1, [r7, r6]
+	strb	r1, [r7, r6]
 	add		r6, r6, #1
 
 	@ If column < xsize, execute loop again
@@ -201,12 +201,12 @@ run:
 	mul	r1, r9, r2
 	ldr	r0, [r0, r1]
 
-	ldr	r1, =junk 	@ load junk buffer
+	ldr	r1, =junk		@ load junk buffer
 	mov	r2, #1
 
 	mov	r7, #sys_read
 	svc	#0
-	
+
 	@ -- write results to file --
 	mov	r2, r6
 	mov	r0, r4
@@ -308,7 +308,7 @@ run:
 	pop	{r4, r5, r6, r7, r8, r9, r10, pc}
 
 .bss
-buffer: 	.space 64*1024
-finished: 	.space 8
-pipes:		.space 8*4
-junk:		.space 4
+	buffer:		.space 64*1024
+	finished:	 .space 8
+	pipes:		.space 8*4
+	junk:		.space 4

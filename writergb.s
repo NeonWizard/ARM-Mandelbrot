@@ -1,6 +1,7 @@
-        .global writeRGB
+.global writeRGB
 
-        .text
+.text
+
 @ writeRGB(buffer, rgb) -> number of bytes written
 writeRGB:
 	push	{r4, r5, r6, lr}

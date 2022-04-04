@@ -1,9 +1,10 @@
-        .global getColor
+.global getColor
 
-        .text
+.text
+
 @ getColor(iters) -> rgb
 getColor:
-        push    {ip,lr}
+	push {ip,lr}
 
 	sub	r0, r0, #1
 	ldr	r1, =palette_size
@@ -15,4 +16,4 @@ getColor:
 	ldr	r0, =palette
 	ldr	r0, [r0, r1]
 
-	pop     {ip,pc}
+	pop {ip,pc}

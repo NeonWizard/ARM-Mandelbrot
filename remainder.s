@@ -1,6 +1,7 @@
-        .global remainder
+.global remainder
 
-        .text
+.text
+
 @ remainder(numerator, denominator) -> remainder
 remainder:
 	push	{r4, lr}
@@ -28,10 +29,10 @@ remainder:
 
 2:
 	sub	r2, r2, #1
-	
+
 	# if shift >=0 continue while loop
 	cmp	r2, #0
 	bge	1b
 
 3:
-	pop	{r4, pc}	
+	pop	{r4, pc}

@@ -1,14 +1,14 @@
-        .global mandel
+.global mandel
 
-        .text
+.text
 
 @ mandel(maxiters, x, y) -> iters
 mandel:
 	@ x and y are passed in to the d0 and d1 registers
 
-	fldd	d7, escape_amount
-	mov	r1, r0			@ keep track of maxiters
-	mov	r0, #1			@ set # of iterations = 1
+	fldd	 d7, escape_amount
+	mov		r1, r0			@ keep track of maxiters
+	mov		r0, #1			@ set # of iterations = 1
 
 	@ copy x and y into a and b
 	fcpyd	d2, d0
@@ -40,7 +40,7 @@ mandel:
 
 	@ compute a = a^2 - b^2 + x
 	fsubd	d2, d4, d5		@ a = a^2 - b^2
-	faddd	d2, d2, d0		@ a = a + x (a^2 - b^2 + x)	
+	faddd	d2, d2, d0		@ a = a + x (a^2 - b^2 + x)
 
 	b	1b			@ continue loop
 

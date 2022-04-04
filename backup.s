@@ -1,6 +1,7 @@
-        .global calcPixel
+.global calcPixel
 
-        .text
+.text
+
 @ calcPixel(maxiters, col, row, xsize, ysize, antialias, xcenter, ycenter, magnification) -> rgb
 calcPixel:
 	@ passed in values:
@@ -36,9 +37,9 @@ calcPixel:
 	ldr		r4, [sp, #20]
 
 	@ d registers structure:
-	@ d0 - col 		-> x
-	@ d1 - row 		-> y
-	@ d2 - mag 		-> (minsize-1) * mag
+	@ d0 - col		-> x
+	@ d1 - row		-> y
+	@ d2 - mag		-> (minsize-1) * mag
 	@ d3 - xcenter
 	@ d4 - ycenter
 	@ d5 - xsize	-> col - xsize/2
@@ -53,7 +54,7 @@ calcPixel:
 	fcmpd	d5, d6		@ compare xsize with ysize
 	fmstat
 	fcpyd	d7, d6		@ d7 (minsize) = ysize UNLESS
-	bgt		1f			@ if xsize > ysize, keep minsize = ysize 
+	bgt		1f			@ if xsize > ysize, keep minsize = ysize
 	fcpyd	d7, d5		@ else set d7 (minsize) as xsize
 1:
 	fldd	d8, float_one

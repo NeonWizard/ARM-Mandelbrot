@@ -1,6 +1,7 @@
-	.global divide
+.global divide
 
-	.text
+.text
+
 @ write your code here
 @ divide (numerator, denominator) -> quotient
 divide:
@@ -24,7 +25,7 @@ divide:
 	add	r4, r4, r4	@ quotient = quotient + quotient
 	mov	r3, r1, lsl r2	@ r3 = d << shift
 	cmp	r0, r3
-	blt	2f 
+	blt	2f
 	sub	r0, r0, r3	@ n = n - d<<shift
 	add	r4, r4, #1	@ quotient = quotient + 1
 2:

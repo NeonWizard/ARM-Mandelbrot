@@ -1,8 +1,9 @@
 @ write your code here
-	.global setupSubpixel
-	.global subpixelOffsets
+.global setupSubpixel
+.global subpixelOffsets
 
-	.text
+.text
+
 @ setupSubpixel(antialias) -> None
 setupSubpixel:
 	push	{r4, lr}
@@ -45,4 +46,3 @@ float_half: .double 0.5
 
 .bss
 subpixelOffsets: .space 8*64
-

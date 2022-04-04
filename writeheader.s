@@ -1,6 +1,7 @@
-        .global writeHeader
+.global writeHeader
 
-        .text
+.text
+
 @ writeHeader(buffer, x, y) -> number of bytes written
 writeHeader:
 	push	{r4, r5, r6, lr}
